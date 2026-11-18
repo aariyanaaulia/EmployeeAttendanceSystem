@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EAMS - Employee Dashboard</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Existing CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body class="employee-page">
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <h3>EAMS</h3>
+        <p>Employee Portal</p>
+
+        <nav>
+            <a href="employee-dashboard.html" class="active">
+                Dashboard
+            </a>
+
+            <a href="#attendance">
+                My Attendance
+            </a>
+
+            <a href="index.html" id="logoutBtn">
+                Logout
+            </a>
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <div class="top-header">
+
+            <div>
+                <h2>Employee Dashboard</h2>
+
+                <p>
+                    Welcome,
+                    <span id="welcomeEmployeeName">Employee</span>!
+                    Welcome to your EAMS employee portal.
+                </p>
+            </div>
+
+            <span class="admin-label">Employee</span>
+
+        </div>
+
+
+        <!-- EMPLOYEE INFORMATION -->
+        <div class="table-card mt-4">
+
+            <h5>My Information</h5>
+
+            <div class="row mt-3">
+
+                <div class="col-md-6 mb-3">
+                    <strong>Employee ID</strong>
+                    <p id="employeeID">-</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Employee Name</strong>
+                    <p id="employeeName">-</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Department</strong>
+                    <p id="employeeDepartment">-</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Position</strong>
+                    <p id="employeePosition">-</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ATTENDANCE SUMMARY -->
+        <div class="row g-3 mt-3">
+
+            <div class="col-md-4">
+                <div class="stat-card present-card">
+
+                    <h6>Today's Status</h6>
+
+                    <h2 id="todayStatus">
+                        Not Checked In
+                    </h2>
+
+                    <p>Attendance status</p>
+
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="stat-card">
+
+                    <h6>Check-in Time</h6>
+
+                    <h2 id="checkInTime">
+                        --:--
+                    </h2>
+
+                    <p>Today's check-in</p>
+
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="stat-card late-card">
+
+                    <h6>Check-out Time</h6>
+
+                    <h2 id="checkOutTime">
+                        --:--
+                    </h2>
+
+                    <p>Today's check-out</p>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- DAILY ATTENDANCE -->
+        <div class="table-card mt-4">
+
+            <h5>Daily Attendance</h5>
+
+            <p class="text-muted mt-2">
+                Select your attendance time before checking in
+                and checking out.
+            </p>
+
+
+            <div class="row mt-3">
+
+                <!-- CHECK-IN -->
+                <div class="col-md-5 mb-3">
+
+                    <label for="checkInTimeInput" class="form-label">
+                        Select Check-in Time
+                    </label>
+
+                    <input
+                        type="text"
+                        id="checkInTimeInput"
+                        class="form-control"
+                        value="08:00"
+                        placeholder="08:00"
+                        maxlength="5"
+                        inputmode="numeric"
+                        pattern="([01][0-9]|2[0-3]):[0-5][0-9]"
+                        required>
+
+                    <small class="text-muted">
+                        Enter arrival time in 24-hour format (e.g. 08:00).
+                    </small>
+
+                </div>
+
+
+                <!-- CHECK-OUT -->
+                <div class="col-md-5 mb-3">
+
+                    <label for="checkOutTimeInput" class="form-label">
+                        Select Check-out Time
+                    </label>
+
+                    <input
+                        type="text"
+                        id="checkOutTimeInput"
+                        class="form-control"
+                        value="17:00"
+                        placeholder="17:00"
+                        maxlength="5"
+                        inputmode="numeric"
+                        pattern="([01][0-9]|2[0-3]):[0-5][0-9]"
+                        required>
+
+                    <small class="text-muted">
+                        Enter departure time in 24-hour format (e.g. 17:00).
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+            <div class="d-flex flex-wrap gap-3 mt-2">
+
+                <button
+                    type="button"
+                    id="employeeCheckInBtn"
+                    class="btn btn-success">
+
+                    Check In
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="employeeCheckOutBtn"
+                    class="btn btn-warning"
+                    disabled>
+
+                    Check Out
+
+                </button>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+            <p
+                id="attendanceActionMessage"
+                class="mt-3 mb-0"
+                role="status"
+                aria-live="polite">
+            </p>
+
+        </div>
+
+
+        <!-- ATTENDANCE HISTORY -->
+        <div class="table-card mt-4" id="attendance">
+
+            <h5>My Attendance History</h5>
+
+            <p class="text-muted mt-2">
+                View your previous attendance records.
+            </p>
+
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mt-3">
+
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody id="employeeAttendanceTable">
+
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">
+                                Loading attendance records...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER -->
+        <footer>
+            © 2026 EAMS - Employee Attendance Management System
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+<script src="js/employee-dashboard.js"></script>
+
+</body>
+</html>
+
+
